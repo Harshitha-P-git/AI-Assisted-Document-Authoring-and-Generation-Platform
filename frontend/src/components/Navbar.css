@@ -1,0 +1,156 @@
+.navbar {
+  background-color: #FFFFFF;
+  color: #1F2937;
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-left {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.navbar-center {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-right {
+  width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-logo {
+  font-size: 28px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  letter-spacing: -0.5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.navbar-logo:hover {
+  opacity: 0.9;
+}
+
+.logo-accent {
+  color: #1A73E8;
+  font-weight: 700;
+}
+
+.logo-main {
+  color: #1F2937;
+  font-weight: 600;
+}
+
+
+.navbar-link {
+  color: #1F2937;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 17px;
+  font-weight: 500;
+  position: relative;
+  white-space: nowrap;
+}
+
+.navbar-link:hover {
+  color: #1A73E8;
+  background-color: #F0F6FF;
+}
+
+.navbar-link:hover::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background-color: #1A73E8;
+  border-radius: 1px;
+}
+
+.navbar-user {
+  color: #1F2937;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #1F2937;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+}
+
+.btn-logout:hover {
+  color: #1A73E8;
+  background-color: #F0F6FF;
+}
+
+.btn-logout:hover::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background-color: #1A73E8;
+  border-radius: 1px;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .navbar-left {
+    display: none;
+  }
+  
+  .navbar-center {
+    flex: 0;
+    width: 100%;
+  }
+  
+  .navbar-right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
