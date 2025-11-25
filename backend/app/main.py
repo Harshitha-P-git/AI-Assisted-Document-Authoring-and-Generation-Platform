@@ -23,9 +23,10 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
 )
 
-# CORS configuration
+# CORS configuration - Allow all Netlify preview URLs
 app.add_middleware(
     CORSMiddleware,
+    allow_origin_regex=r"https://.*\.netlify\.app|https://.*\.netlify\.com",
     allow_origins=settings.cors_origins_list,
     allow_credentials=True,
     allow_methods=["*"],
