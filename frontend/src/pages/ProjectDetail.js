@@ -24,23 +24,38 @@ function ProjectDetail() {
   }, [projectId]);
 
   const fetchContent = useCallback(async () => {
+    // Don't fetch content if project is not loaded yet
+    if (!project) {
+      return;
+    }
+
     try {
-      if (project?.project_type === 'word') {
+      if (project.project_type === 'word') {
         const response = await api.get(`/generation/project/${projectId}/sections`);
-        setSections(response.data);
-      } else {
+        setSections(response.data || []);
+      } else if (project.project_type === 'powerpoint') {
         const response = await api.get(`/generation/project/${projectId}/slides`);
-        setSlides(response.data);
+        setSlides(response.data || []);
       }
     } catch (err) {
-      // Content might not exist yet
+      // Content might not exist yet - this is normal for new projects
+      // Only log if it's not a 404 or 400 (expected errors)
+      if (err.response?.status !== 404 && err.response?.status !== 400) {
+        console.warn('Failed to fetch content:', err.response?.status);
+      }
     }
   }, [projectId, project]);
 
   useEffect(() => {
     fetchProject();
-    fetchContent();
-  }, [fetchProject, fetchContent]);
+  }, [fetchProject]);
+
+  useEffect(() => {
+    // Only fetch content after project is loaded
+    if (project) {
+      fetchContent();
+    }
+  }, [project, fetchContent]);
 
   const handleGenerate = async () => {
     setError('');

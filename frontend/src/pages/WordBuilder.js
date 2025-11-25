@@ -17,7 +17,10 @@ function WordBuilder() {
       setOutline(response.data.outline || ['']);
       setContext(response.data.context || '');
     } catch (err) {
-      // Config doesn't exist yet, that's okay
+      // Config doesn't exist yet, that's okay - suppress console errors for 404
+      if (err.response?.status !== 404) {
+        console.warn('Failed to fetch config:', err.response?.status);
+      }
     }
   }, [projectId]);
 
