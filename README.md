@@ -147,7 +147,7 @@ CORS_ORIGINS=http://localhost:3000,http://localhost:5173
 
 # Gemini API (Optional - for AI content generation)
 GEMINI_API_KEY=your-gemini-api-key-here
-GEMINI_MODEL=gemini-1.5-flash-001  # Updated: gemini-pro is deprecated. Try gemini-1.5-flash-001 or gemini-1.5-pro-001
+GEMINI_MODEL=gemini-1.5-flash  # Python SDK format (no -001 suffix). Try gemini-1.5-flash or gemini-1.5-pro
 
 # OpenAI API (Optional - Alternative to Gemini, recommended for Python 3.14)
 OPENAI_API_KEY=your-openai-api-key-here

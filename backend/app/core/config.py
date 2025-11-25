@@ -34,8 +34,11 @@ class Settings(BaseSettings):
     
     # Gemini API
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-    # Try gemini-1.5-flash-001 or gemini-1.5-pro-001 if gemini-1.5-flash doesn't work
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-1.5-flash-001")  # Updated from deprecated gemini-pro
+    # Model names for Python SDK (without -001 suffix):
+    # - "gemini-1.5-flash" (fast, efficient)
+    # - "gemini-1.5-pro" (more capable)
+    # - "gemini-pro" (deprecated, may not work)
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")  # Python SDK format (no -001 suffix)
     
     # OpenAI API (Alternative LLM)
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
