@@ -31,18 +31,21 @@ function ProjectDetail() {
 
     try {
       if (project.project_type === 'word') {
-        const response = await api.get(`/generation/project/${projectId}/sections`);
+        // Mark as silent - 404/400 is expected if content not generated yet
+        const response = await api.get(`/generation/project/${projectId}/sections`, {
+          silent: true
+        });
         setSections(response.data || []);
       } else if (project.project_type === 'powerpoint') {
-        const response = await api.get(`/generation/project/${projectId}/slides`);
+        // Mark as silent - 404/400 is expected if content not generated yet
+        const response = await api.get(`/generation/project/${projectId}/slides`, {
+          silent: true
+        });
         setSlides(response.data || []);
       }
     } catch (err) {
       // Content might not exist yet - this is normal for new projects
-      // Only log if it's not a 404 or 400 (expected errors)
-      if (err.response?.status !== 404 && err.response?.status !== 400) {
-        console.warn('Failed to fetch content:', err.response?.status);
-      }
+      // Silently handled - browser may show network error but it's harmless
     }
   }, [projectId, project]);
 

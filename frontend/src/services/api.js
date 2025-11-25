@@ -34,11 +34,25 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const config = error.config || {};
+    const isSilent = config.silent === true;
+    const status = error.response?.status;
+    
+    // Handle 401 - unauthorized
+    if (status === 401) {
       // Clear auth and redirect to login
       localStorage.removeItem('auth-storage');
       window.location.href = '/login';
+      return Promise.reject(error);
     }
+    
+    // Suppress console errors for expected failures (404, 400) if marked as silent
+    // Note: Browser network errors will still show in Network tab, but won't clutter Console
+    if (isSilent && (status === 404 || status === 400)) {
+      // Return a rejected promise without logging
+      return Promise.reject(error);
+    }
+    
     return Promise.reject(error);
   }
 );

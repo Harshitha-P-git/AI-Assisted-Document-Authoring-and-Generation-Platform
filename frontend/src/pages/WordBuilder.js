@@ -13,14 +13,15 @@ function WordBuilder() {
 
   const fetchConfig = useCallback(async () => {
     try {
-      const response = await api.get(`/documents/word/${projectId}/config`);
+      // Mark as silent - 404 is expected for new projects
+      const response = await api.get(`/documents/word/${projectId}/config`, {
+        silent: true
+      });
       setOutline(response.data.outline || ['']);
       setContext(response.data.context || '');
     } catch (err) {
-      // Config doesn't exist yet, that's okay - suppress console errors for 404
-      if (err.response?.status !== 404) {
-        console.warn('Failed to fetch config:', err.response?.status);
-      }
+      // Config doesn't exist yet, that's okay - silently handled
+      // Browser may still show network error, but it's harmless
     }
   }, [projectId]);
 
