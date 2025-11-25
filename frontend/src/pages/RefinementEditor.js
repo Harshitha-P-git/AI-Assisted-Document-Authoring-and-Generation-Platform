@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import './RefinementEditor.css';
@@ -18,13 +18,7 @@ function RefinementEditor() {
   const [revisions, setRevisions] = useState([]);
   const [showRevisions, setShowRevisions] = useState(false);
 
-  useEffect(() => {
-    fetchContent();
-    fetchRefinements();
-    fetchRevisions();
-  }, [projectId, type, id]);
-
-  const fetchContent = async () => {
+  const fetchContent = useCallback(async () => {
     try {
       const endpoint = type === 'section'
         ? `/generation/project/${projectId}/sections`
@@ -41,9 +35,9 @@ function RefinementEditor() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [projectId, type, id]);
 
-  const fetchRefinements = async () => {
+  const fetchRefinements = useCallback(async () => {
     try {
       const endpoint = type === 'section'
         ? `/refinement/section/${id}/refinements`
@@ -54,16 +48,22 @@ function RefinementEditor() {
     } catch (err) {
       // Refinements might not exist yet
     }
-  };
+  }, [type, id]);
 
-  const fetchRevisions = async () => {
+  const fetchRevisions = useCallback(async () => {
     try {
       const response = await api.get(`/refinement/project/${projectId}/revisions`);
       setRevisions(response.data);
     } catch (err) {
       // Revisions might not exist yet
     }
-  };
+  }, [projectId]);
+
+  useEffect(() => {
+    fetchContent();
+    fetchRefinements();
+    fetchRevisions();
+  }, [fetchContent, fetchRefinements, fetchRevisions]);
 
   const handleRefine = async () => {
     if (!prompt.trim()) {

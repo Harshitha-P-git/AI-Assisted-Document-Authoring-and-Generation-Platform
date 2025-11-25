@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import './Builder.css';
@@ -8,15 +8,10 @@ function WordBuilder() {
   const navigate = useNavigate();
   const [outline, setOutline] = useState(['']);
   const [context, setContext] = useState('');
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    fetchConfig();
-  }, [projectId]);
-
-  const fetchConfig = async () => {
+  const fetchConfig = useCallback(async () => {
     try {
       const response = await api.get(`/documents/word/${projectId}/config`);
       setOutline(response.data.outline || ['']);
@@ -24,7 +19,11 @@ function WordBuilder() {
     } catch (err) {
       // Config doesn't exist yet, that's okay
     }
-  };
+  }, [projectId]);
+
+  useEffect(() => {
+    fetchConfig();
+  }, [fetchConfig]);
 
   const handleAddSection = () => {
     setOutline([...outline, '']);

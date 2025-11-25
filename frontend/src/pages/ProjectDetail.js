@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import api from '../services/api';
 import './ProjectDetail.css';
 
 function ProjectDetail() {
   const { projectId } = useParams();
-  const navigate = useNavigate();
   const [project, setProject] = useState(null);
   const [sections, setSections] = useState([]);
   const [slides, setSlides] = useState([]);
@@ -13,12 +12,7 @@ function ProjectDetail() {
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchProject();
-    fetchContent();
-  }, [projectId]);
-
-  const fetchProject = async () => {
+  const fetchProject = useCallback(async () => {
     try {
       const response = await api.get(`/projects/${projectId}`);
       setProject(response.data);
@@ -27,9 +21,9 @@ function ProjectDetail() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [projectId]);
 
-  const fetchContent = async () => {
+  const fetchContent = useCallback(async () => {
     try {
       if (project?.project_type === 'word') {
         const response = await api.get(`/generation/project/${projectId}/sections`);
@@ -41,7 +35,12 @@ function ProjectDetail() {
     } catch (err) {
       // Content might not exist yet
     }
-  };
+  }, [projectId, project]);
+
+  useEffect(() => {
+    fetchProject();
+    fetchContent();
+  }, [fetchProject, fetchContent]);
 
   const handleGenerate = async () => {
     setError('');
