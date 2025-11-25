@@ -565,17 +565,4 @@ For issues and questions:
 
 ---
 
-## 🎯 Future Enhancements
-
-- [ ] Real-time collaboration
-- [ ] Template library
-- [ ] Multiple LLM provider support
-- [ ] Advanced formatting options
-- [ ] Version comparison tool
-- [ ] Export to PDF
-- [ ] Batch operations
-- [ ] API rate limiting dashboard
-
----
-
 **Made with ❤️ using FastAPI and React**
