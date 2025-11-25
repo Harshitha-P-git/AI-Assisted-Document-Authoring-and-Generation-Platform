@@ -185,7 +185,7 @@ async def export_powerpoint_document(
                 title_para = title_frame.paragraphs[0]
                 title_para.font.size = Pt(36)
                 title_para.font.bold = True
-                title_para.font.color.rgb = None  # Use theme color
+                # Don't set color.rgb to None - use default theme color by not setting it
                 title_para.space_after = Pt(12)
                 
                 # Add content
