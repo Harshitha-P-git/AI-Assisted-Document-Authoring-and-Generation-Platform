@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     
     # Gemini API
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-pro")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")  # Updated from deprecated gemini-pro
     
     # OpenAI API (Alternative LLM)
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
