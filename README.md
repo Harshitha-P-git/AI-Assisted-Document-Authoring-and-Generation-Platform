@@ -63,8 +63,8 @@ A full-stack platform for AI-assisted document creation and generation, supporti
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+git clone https://github.com/Harshitha-P-git/AI-Assisted-Document-Authoring-and-Generation-Platform.git
+cd AI-Assisted-Document-Authoring-and-Generation-Platform
 ```
 
 ### Step 2: Backend Setup
@@ -311,99 +311,6 @@ docker-compose up --build
 
 ---
 
-## 🐙 GitHub Deployment Instructions
-
-### Step 1: Prepare Your Repository
-
-1. **Initialize Git** (if not already done):
-   ```bash
-   git init
-   ```
-
-2. **Create `.gitignore`** (if not exists):
-   ```
-   # Python
-   __pycache__/
-   *.py[cod]
-   venv/
-   env/
-   *.db
-   *.sqlite
-
-   # Node
-   node_modules/
-   npm-debug.log*
-
-   # Environment
-   .env
-   .env.local
-   backend/.env
-   frontend/.env
-
-   # IDE
-   .vscode/
-   .idea/
-
-   # Uploads
-   uploads/
-   logs/
-
-   # Build
-   frontend/build/
-   dist/
-   ```
-
-3. **Stage all files:**
-   ```bash
-   git add .
-   ```
-
-4. **Create initial commit:**
-   ```bash
-   git commit -m "Initial commit: AI Document Generator"
-   ```
-
-### Step 2: Create GitHub Repository
-
-1. Go to https://github.com/new
-2. **Repository name**: `ai-document-generator` (or your preferred name)
-3. **Description**: "AI-Assisted Document Authoring and Generation Platform"
-4. Choose **Public** or **Private**
-5. **DO NOT** initialize with README, .gitignore, or license (we already have these)
-6. Click **"Create repository"**
-
-### Step 3: Push to GitHub
-
-1. **Add remote repository:**
-   ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-   ```
-
-2. **Rename branch to main** (if needed):
-   ```bash
-   git branch -M main
-   ```
-
-3. **Push to GitHub:**
-   ```bash
-   git push -u origin main
-   ```
-
-### Step 4: Update README with Your Repository Info
-
-After pushing, update the clone URL in this README:
-- Replace `YOUR_USERNAME` with your GitHub username
-- Replace `YOUR_REPO_NAME` with your repository name
-
-### Step 5: Add Environment Variables Template
-
-Create a `.env.example` file in `backend/`:
-
-```bash
-cd backend
-# Create .env.example with all variables (without actual values)
-```
-
 Example `.env.example`:
 ```env
 SECRET_KEY=your-secret-key-here
@@ -414,12 +321,6 @@ OPENAI_API_KEY=
 USE_OPENAI=false
 MOCK_LLM=false
 ```
-
-### Step 6: Verify Repository
-
-1. Visit your repository on GitHub: `https://github.com/YOUR_USERNAME/YOUR_REPO_NAME`
-2. Verify all files are uploaded
-3. Check that `.env` files are NOT included (they should be in `.gitignore`)
 
 ---
 
@@ -495,16 +396,6 @@ cd frontend
 npm test
 ```
 
----
-
-## 🚢 Production Deployment
-
-For production deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
-
-Quick deployment options:
-- **Frontend**: Vercel, Netlify
-- **Backend**: Railway, Render, Heroku
-- **Full Stack**: Docker on AWS, DigitalOcean, Azure
 
 ---
 
